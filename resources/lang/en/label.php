@@ -17,6 +17,7 @@ return [
     'email' => 'Email',
     'address' => 'Address',
     'phone' => 'Phone',
+    'ok' => 'OK',
     'cancel' => 'Cancel',
     'update_profile' => 'Update Profile',
     'avatar' => 'Avatar',
@@ -25,5 +26,6 @@ return [
     'manage_room' => 'Manage Room',
     'manage_categories' => 'Manage Categories',
     'assign_kwh_price' => 'Assign KWH Price',
+    'notification' => 'Notifcation',
 
 ];

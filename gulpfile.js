@@ -16,7 +16,15 @@ elixir(function(mix) {
     mix.less('admin-lte/AdminLTE.less');
     mix.less('bootstrap/bootstrap.less');
     mix.sass('all.scss');
+});
+
+elixir(function(mix) {
     mix.scripts([
-        "all.js",
+        "app.js",
     ]);
+
+    mix.scripts([
+        "semantic.min.js",
+        "underscore.js",
+    ], 'public/js/plugins.js');
 });

@@ -19,4 +19,5 @@ return [
     'manager_room' => 'Manager Room',
     'dashboard_table' => 'Dashboard',
     'name' => 'Room Name',
+    'room_list' => 'Room List',
 ];
