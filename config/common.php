@@ -1,10 +1,9 @@
 <?php
 
 return [
-    'role' => [
+    'roles' => [
         'user' => 0,
         'admin' => 1,
-        'guest' => 2,
     ],
 
     'avatar_default' => '/images/default.png',
@@ -21,5 +20,14 @@ return [
         5 => 'Activated',
         6 => 'Deactivated',
     ],
-
+    'user' => [
+        'user_limit' => 30,
+        'confirmed' => [
+            'is_confirm' => 1,
+            'not_confirm' => 0,
+        ],
+        'confirmation_code' => [
+            'length' => 10,
+        ],
+    ],
 ];

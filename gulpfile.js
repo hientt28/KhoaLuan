@@ -22,9 +22,5 @@ elixir(function(mix) {
     mix.scripts([
         "app.js",
     ]);
-
-    mix.scripts([
-        "semantic.min.js",
-        "underscore.js",
-    ], 'public/js/plugins.js');
+    mix.styles('layout.css');
 });

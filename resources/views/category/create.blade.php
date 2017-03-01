@@ -41,11 +41,9 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-7 col-md-offset-8">
-                                {!! Form::button('<i class="fa fa-plus-circle"></i>&nbsp;' . trans('category.add'), [
-                                    'type' => 'submit', 
-                                    'class' => 'btn btn-success btn-sm',
-                                ]) !!}
+                            <div class="col-md-6 col-md-offset-7">
+                                {{ Form::button('<i class="fa fa-btn fa-user"></i> ' . trans('common.save'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
+                                <a href="{{ route('categories.index') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> {{ trans("common.back") }}</a>
                             </div>
                         </div>
                     {!! Form::close() !!}      

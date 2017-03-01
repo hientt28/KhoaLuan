@@ -11,26 +11,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 <body class="skin-blue sidebar-mini">
-<div class="wrapper">
+	<div class="wrapper">
 
-    @include('layouts.partials.mainheader')
+	    @include('layouts.partials.mainheader')
+	    @if (Auth::check() && Auth::user()->isAdmin())
+	        @include('layouts.partials.sidebar')
+	    @endif
+	   
+	    @if (!Auth::guest())
+	        <div class="content-wrapper">
 
-    @include('layouts.partials.sidebar')
+		        @include('layouts.partials.contentheader')
+		        
+		        @yield('main-content')
+		       
+		    </div><!-- /.content-wrapper -->
+	    @else
+	        @yield('content')
+	    @endif
+	    <!-- Content Wrapper. Contains page content -->
+	    @section('scripts')
+		    @include('layouts.partials.scripts')
+		@show
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-
-        @include('layouts.partials.contentheader')
-        
-        @yield('main-content')
-       
-    </div><!-- /.content-wrapper -->
-
-</div><!-- ./wrapper -->
-
-@section('scripts')
-    @include('layouts.partials.scripts')
-@show
-
+	</div><!-- ./wrapper -->
 </body>
 </html>

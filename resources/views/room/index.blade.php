@@ -1,32 +1,86 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 col-md-12 body-content">
-            @if(session()->has('success') || session()->has('errors'))
-                <div class="ui message {{ session()->has('success') ? ' info' : ' warning'  }}}}">
-                    <div class="header">
-                        {{ trans('label.notification') }}
+    
+    <div class="container">
+        <section>
+            <div class="row page-title-row">
+                <div class="col-md-6 col-md-offset-2">
+                    <h3> {{ trans('common.manager_room') }} </h3>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            {{ trans('common.room_table') }}
+                        </div>
+                        <div class="panel-body">
+                            
+                            <table class="table" id="myTable">
+                                <thead>
+                                    <tr class="filters">
+                                        
+                                        <th class="text-center"><input type="checkbox" id="checkAll"/></th>
+                                        <th class="text-center"> {{ trans('common.id') }} </th>
+                                        <th class="text-center"> {{ trans('common.name') }} </th>
+                                        <th class="text-center">{{ trans('common.action') }}</th>
+                                        <th class="text-center">{{ trans('common.delete') }}</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($rows as $key => $row)
+                                        <tr>
+                                            <td class="text-center"><input type="checkbox" class="checkthis" name="checkbox[]" value="{{ $row->id }}"/></td>
+                                            <td class="text-center"> {{ $row->id }} </td>
+                                            <td class="text-center"> {{ $row->name }} </td>
+                                            <td class="text-center">
+                                                <a class="btn btn-primary" href="{{ route('rooms.edit', [ $row->id ]) }}" title="">
+                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                    {{ trans('common.edit') }}
+                                                </a>
+
+                                                <a class="btn btn-success" href="{{ route('rooms.show', [ $row->id ]) }}" title="detail">
+                                                    <span class="glyphicon glyphicon-arrow-right"></span>
+                                                    {{ trans('common.detail') }}
+                                                    
+                                                </a>
+                                               
+                                                <!-- <a class="btn btn-danger" href="{{ route('rooms.destroy', [ $row->id ]) }}">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                    {{ trans('common.delete') }}
+                                                </a> -->
+
+                                            </td>
+                                            <td class="text-center">
+                                                 {!! Form::open(['route' => ['rooms.destroy', $row->id], 'method' => 'DELETE']) !!}
+                                                    {{ Form::button("<i class=\"fa fa-trash-o\"></i> ", [
+                                                        'class' => 'btn btn-danger',
+                                                        'onclick' => "return confirm('" . trans('common.confirm_delete') . "')",
+                                                        'type' => 'submit',
+                                                    ]) }}
+                                                {!! Form::close() !!}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination pull-right">
+                            {!! $rows->links() !!}
+                        </div>
+
                     </div>
-                    <p>{{ session()->has('success') ? session('success') : session('errors') }}</p>
-                </div>
-            @endif
-            <div class="ui message result-msg info" style="display:none;">
-                <div class="header">
-                    {{ trans('label.notification') }}
-                </div>
-                <p class="result-msg-content"></p>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3>{{ trans('common.room_list') }}</h3>
-                    <i class="fa fa-refresh"
-                       onclick="courseBuilder.utils().redirect(&quot;{{ route('rooms.index') }}&quot;)"></i>
-                </div>
-                <div class="panel-body">
-                    @include('room.grid')
+                    <div class="col-md-7 text-left">
+                        <a href="{{ route('rooms.create') }}" class="btn btn-success">
+                            <i class="glyphicon glyphicon-plus-sign"></i>   
+                         {{ trans('common.add_room') }} </a>
+                         <a href="{{ route('dashboard') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> {{ trans("common.back") }}</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 @endsection

@@ -8,6 +8,11 @@ use App\Http\Requests\UserRequest;
 use App\Repositories\User\UserRepository;
 use Cloudder;
 use Exception;
+use App\Http\Requests\UserLoginRequest;
+use App\Http\Requests\RegisterRequest;
+use Auth;
+use Response;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -27,7 +32,7 @@ class UserController extends Controller
 
     public function update(UserRequest $request, $id)
     {
-         try {
+        try {
             $user = $this->userRepository->showById($id);
             if ($request->hasFile('avatar')) {
                 $filename = $request->avatar;
@@ -43,5 +48,41 @@ class UserController extends Controller
             return redirect()->route('user.edit')->withError($ex->getMessage());
         }
         return redirect('home');
+    }
+    public function login(UserLoginRequest $request)
+    {
+        if ($request->ajax()) {
+            $auth = [
+                'email' => $request->email,
+                'password' => $request->password,
+            ];
+            if (Auth::attempt($auth)) {
+                return Response::json(['success' => true, 'url' => route(Auth::user()->isAdmin() ? 'admin' : 'home')]);
+            }
+
+            return Response::json(['success' => false, 'messages' => trans('settings.login_error')]);
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('home');
+    }
+
+    public function register(RegisterRequest $request)
+    {
+        if ($request->ajax()) {
+            $userRegister = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+            ];
+
+            $authUser = User::create($userRegister);
+            Auth::login($authUser);
+
+            return Response::json(['success' => true, 'url' => route('home')]);
+        }
     }
 }

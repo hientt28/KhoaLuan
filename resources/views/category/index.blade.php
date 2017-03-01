@@ -30,45 +30,46 @@
                                     <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                             <tr class="filters">
-                                                <th>
+                                                <th class="text-center">
                                                     <input type="checkbox" id="checkAll">
                                                 </th>
-                                                <th>
+                                                <th class="text-center">
                                                    {{ trans('category.id') }}
                                                 </th>
                                                 
-                                                <th>
+                                                <th class="text-center">
                                                    {{ trans('category.name') }}
                                                 </th>
-                                                <th>
+                                                <th class="text-center">
                                                     {{ trans('category.description') }}
                                                 </th>
-                                                <th> 
+                                                <th class="text-center"> 
                                                     {{ trans('category.action') }}
                                                 </th>
+                                                <th class="text-center"> {{ trans('common.delete') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($categories as $category)
                                                 <tr>
-                                                    <td><input type="checkbox" name="checkbox[]" value="{{ $category->id }}"></td>
-                                                    <td>{{ $category->id }}</td>
-                                                    <td>{{ $category->name }}</td>
-                                                    <td>{{ $category->description }}</td>
-                                                    <td>
-                                                        <div class="field">
-                                                            <a class="btn btn-primary" href="{{ route('categories.edit', $category->id) }}" title="">
-                                                                <i class="fa fa-edit"></i>
-                                                                {{ trans('common.edit') }}
-                                                            </a>
-                                                            {!! Form::open(['route' => ['categories.destroy', $category->id], 'method' => 'DELETE']) !!}
-                                                                {{ Form::button("<i class=\"fa fa-trash-o\"></i> ", [
-                                                                    'class' => 'btn btn-danger',
-                                                                    'onclick' => "return confirm('" . trans('common.confirm_delete') . "')",
-                                                                    'type' => 'submit',
-                                                                ]) }}
-                                                            {!! Form::close() !!}
-                                                        </div>
+                                                    <td class="text-center"><input type="checkbox" name="checkbox[]" value="{{ $category->id }}"></td>
+                                                    <td class="text-center">{{ $category->id }}</td>
+                                                    <td class="text-center">{{ $category->name }}</td>
+                                                    <td class="text-center">{{ $category->description }}</td>
+                                                    <td class="text-center">
+                                                        <a class="btn btn-primary" href="{{ route('categories.edit', $category->id) }}" title="">
+                                                            <i class="fa fa-edit"></i>
+                                                            {{ trans('common.edit') }}
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {!! Form::open(['route' => ['categories.destroy', $category->id], 'method' => 'DELETE']) !!}
+                                                            {{ Form::button("<i class=\"fa fa-trash-o\"></i> ", [
+                                                                'class' => 'btn btn-danger',
+                                                                'onclick' => "return confirm('" . trans('common.confirm_delete') . "')",
+                                                                'type' => 'submit',
+                                                            ]) }}
+                                                        {!! Form::close() !!}
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -1,6 +1,133 @@
- 
-var roomBuilder = (function () {
-    var room = new appBuilder();
+var appBuilder = function () {
+
+    this.tooltip = function (configs) {
+        if (_.isNull(configs) || _.isUndefined(configs)) {
+            return;
+        } else {
+            for (var k in configs) {
+                var config = configs[k];
+                var element = config.element ? config.element : null;
+                if (_.isNull(element)) {
+                    return;
+                }
+
+                if (_.isFunction(element.popup)) {
+                    element.popup({
+                        position: config.position ? config.position : 'right center',
+                        content: config.content ? config.content : ''
+                    })
+                }
+            }
+        }
+    };
+
+    this.animate = function (configs) {
+        for (var k in configs) {
+            var config = configs[k];
+            var animate = config.animate ? config.animate : null;
+            if (_.isNull(animate)) {
+                continue;
+            } else {
+                var callback = config.callack ? config.callback : undefined;
+                if (_.isUndefined(callback)) {
+                    setTimeout(function () {
+                        animate.transition(config.animateName);
+                    }, 400);
+                } else {
+                    callback();
+                }
+            }
+        }
+    }
+
+    this.utils = new function () {
+        var parent = this;
+        /*format data send ajax from serialize data*/
+        var processData = function (data) {
+            if (_.contains(data, '&')) {
+                data = data.split('&');
+                var obj = {};
+                for (var k in data) {
+                    if (_.contains(data[k], '=')) {
+                        var temp = data[k].split('=');
+                        if (Array.isArray(temp)) {
+                            obj[temp[0]] = temp[1];
+                        }
+                    }
+                }
+                return obj;
+            }
+            ;
+            return data;
+        };
+        /*common method send request with ajax*/
+        this.sendData = function (config) {
+            var request = $.ajax({
+                url: config.url ? config.url : '',
+                data: config.data ? config.data : null,
+                dataType: config.dataType ? config.dataType : 'json',
+                type: config.method ? config.method : 'POST',
+                beforeSend: config.beforeSend ? config.beforeSend : function () {
+                }
+            });
+
+            request.done(function (res) {
+                if (typeof config.callback === 'function') {
+                    config.callback(res);
+                }
+            })
+        };
+
+        this.loading = function (action, delay) {
+            var _loading = $('.loadingArea');
+            var _delay = delay ? delay : 1;
+            if (action === 'show') {
+                _loading.show(_delay);
+            } else {
+                _loading.hide(_delay);
+            }
+        };
+
+        this.isset = function (val) {
+            return !_.isUndefined(val) && !_.isNull(val);
+        };
+
+        this.redirect = function (url) {
+            if (_.isNull(url) || _.isUndefined(url))
+                return;
+            window.open(url, '_blank');
+        };
+
+        this.validate = function (config) {
+            var validateRules = {};
+            for (var c in config.rules) {
+                validateRules[config.rules[c].id] = {
+                    identifier: config.rules[c].id,
+                    rules: [
+                        {
+                            type: config.rules[c].type ? config.rules[c].type : 'empty',
+                            prompt: config.rules[c].text ? config.rules[c].text : 'Please enter field information',
+                        }
+                    ],
+                }
+            }
+
+            config.form.form(validateRules, {
+                inline: true,
+                on: 'blur'
+            });
+        }
+    };
+
+    this.bindEvent = function (callback) {
+        return _.isFunction(callback) ? callback() : function () {
+        };
+    }
+
+};
+
+var courseBuilder = (function () {
+    var course = new appBuilder();
 
     return {
         tooltip: function () {
@@ -8,12 +135,12 @@ var roomBuilder = (function () {
                 {
                     element: $('.add-course'),
                     position: 'top center',
-                    content: 'Add New Room'
+                    content: 'Add New Course'
                 },
                 {
                     element: $('.del-course-multi'),
                     position: 'top center',
-                    content: 'Delete Room Selected'
+                    content: 'Delete Course Selected'
                 },
                 {
                     element: $('.btn-excel'),
@@ -26,10 +153,10 @@ var roomBuilder = (function () {
                     content: 'Export CSV'
                 },
             ];
-            room.tooltip(configs);
+            course.tooltip(configs);
         },
         animate: function () {
-            room.animate([{
+            course.animate([{
                 animate: $('.body-content'),
                 animateName: 'shake'
             }]);
@@ -64,7 +191,7 @@ var roomBuilder = (function () {
                         }
                     }
                 }
-                if (!room.utils.isset(selected) && courses !== undefined) {
+                if (!course.utils.isset(selected) && courses !== undefined) {
                     $.ajax({
                         url: 'destroySelected',
                         data: {
@@ -73,7 +200,7 @@ var roomBuilder = (function () {
                         type: 'POST',
                         beforeSend: function () {
                             $('#confirmModal').modal('hide');
-                            room.utils.loading('show');
+                            course.utils.loading('show');
                         }
                     }).done(function (res) {
                         setTimeout(function () {
@@ -81,7 +208,7 @@ var roomBuilder = (function () {
                                 $('tr.row-' + parseInt(courses[c])).addClass('hide');
                             }
                             localStorage.clear();
-                            room.utils.loading('hide');
+                            course.utils.loading('hide');
                             $('.result-msg').show(1000);
                             $('.result-msg-content').text('Delete Courses Success!');
                             setTimeout(function () {
@@ -102,7 +229,7 @@ var roomBuilder = (function () {
             });
 
             $('.prompt').change(function () {
-                room.utils.loading('show');
+                course.utils.loading('show');
                 $('input[name="term"]').val($('.prompt').val());
                 setTimeout(function () {
                     $('form[name="search"]').submit();
@@ -119,7 +246,7 @@ var roomBuilder = (function () {
                 var courses = localStorage.getItem('courseList');
                 var checkall = $('input[name="select-all"]').prop('checked');
                 if ((_.isUndefined(courses) || _.isNull(courses)) && !checkall) {
-                    $('.modal-body').text('Please select room before delete!');
+                    $('.modal-body').text('Please select courses before delete!');
                     $('.btn-confirm').prop('disabled', true);
                     $('#confirmModal').modal('show');
                     return;
@@ -129,7 +256,7 @@ var roomBuilder = (function () {
             });
 
             $('.dropdown-entry').change(function () {
-                room.utils.loading('show');
+                course.utils.loading('show');
                 $('input[name="entry"]').val($('.dropdown-entry').val());
                 $('form[name="show-entry"]').submit();
             });
@@ -158,7 +285,7 @@ var roomBuilder = (function () {
 
             $('.btn-ci').click(function () {
                 $('form[name="CI"]').unbind('submit');
-                room.utils.validate({
+                course.utils.validate({
                     form: $('form[name="CI"]'), rules: [
                         {
                             id: 'name',
@@ -224,7 +351,7 @@ var roomBuilder = (function () {
             }
         },
         utils: function () {
-            return room.utils;
+            return course.utils;
         },
         build: function () {
             localStorage.clear();
@@ -293,7 +420,7 @@ var roomBuilder = (function () {
     });
 
     $("[data-toggle=tooltip]").tooltip();
-    roomBuilder.build();
+    courseBuilder.build();
 });
 
 

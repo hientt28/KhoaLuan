@@ -7,8 +7,7 @@ return [
     'room' => 'Room',
     'schedule' => 'Schedule',
     'report' => 'Report',
-    'login' => 'Login',
-    'register' => 'Register',
+    'login' => 'Login Indigo',
     'logout' => 'Logout',
     'profile' => 'Profile',
     'edit_profile' => 'Edit Profile',
@@ -27,5 +26,12 @@ return [
     'manage_categories' => 'Manage Categories',
     'assign_kwh_price' => 'Assign KWH Price',
     'notification' => 'Notifcation',
+    'register' => 'Register',
+    'forgot_password' => 'Forgot Your Password?',
+    'signin' => 'Signin',
+    'reset_password' => 'Reset Password',
+    'continue_with' => 'Continue With',
+    'signup' => 'Sign Up',
+    'remember' => 'Remember me',
 
 ];

@@ -10,8 +10,6 @@ use App\Models\Appliance;
 
 class User extends Authenticatable
 {
-    const ROLE_ADMIN = 1;
-    const ROLE_USER = 0;
     /**
      * The attributes that are mass assignable.
      *
@@ -61,6 +59,6 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role;
+        return $this->role == config('common.roles.admin');
     }
 }

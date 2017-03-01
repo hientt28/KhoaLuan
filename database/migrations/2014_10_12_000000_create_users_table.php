@@ -20,9 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar', 200)->nullable()->default(config('common.avatar_default'));
             $table->string('address');
             $table->integer('phone');
-            $table->integer('role');
-            $table->boolean('confirmed');
-            $table->string('confirmation_code');
+            $table->integer('role')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

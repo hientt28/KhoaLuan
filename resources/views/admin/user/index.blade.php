@@ -21,45 +21,45 @@
                     <table class="table" id="myTable">
                         <thead>
                             <tr class="filters">
-                                <th>
+                                <th class="text-center">
                                     <input type="checkbox" id="checkall"/>
                                 </th>
-                                <th>
-                                    <input type="text" class="form-control" placeholder="{{ trans('settings.stt') }}" disabled>
+                                <th class="text-center">
+                                    {{ trans('settings.stt') }}
                                 </th>
-                                <th>
-                                    <input type="text" class="form-control" placeholder="{{ trans('settings.name') }}" disabled>
+                                <th class="text-center">
+                                   {{ trans('settings.name') }}
                                 </th>
-                                <th>
-                                    <input type="text" class="form-control" placeholder="{{ trans('settings.email') }}" disabled>
+                                <th class="text-center">
+                                    {{ trans('settings.email') }}
                                 </th>
-                                <th>
-                                    <input type="text" class="form-control" placeholder="{{ trans('settings.role') }}" disabled>
-                                </th>
-
-                                <th>
-                                    <input type="text" class="form-control" placeholder="{{ trans('settings.edit') }}" disabled>
+                                <th class="text-center">
+                                    {{ trans('settings.role') }}
                                 </th>
 
-                                <th>
-                                    <input type="text" class="form-control" placeholder="{{ trans('settings.delete') }}" disabled>
+                                <th class="text-center">
+                                   {{ trans('settings.edit') }}
+                                </th>
+
+                                <th class="text-center">
+                                    {{ trans('settings.delete') }}
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($users as $key => $user)
                                 <tr>
-                                    <td><input type="checkbox" class="checkable"/></td>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->role }}</td>
-                                    <td>
+                                    <td class="text-center"><input type="checkbox" class="checkable"/></td>
+                                    <td class="text-center">{{ $key + 1 }}</td>
+                                    <td class="text-center">{{ $user->name }}</td>
+                                    <td class="text-center">{{ $user->email }}</td>
+                                    <td class="text-center">{{ $user->role }}</td>
+                                    <td class="text-center">
                                         <a class="btn btn-success" href="{{ route('admin.users.edit', [ $user->id ]) }}" title="{{ trans('settings.edit') }}">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         {!! Form::open(['route' => ['admin', $user->id], 'method' => 'DELETE']) !!}
                                                 {{ Form::button("<i class=\"fa fa-trash-o\"></i> ", [
                                                     'class' => 'btn btn-danger',

@@ -10,7 +10,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::auth();
 Route::group(['middleware' => 'web'], function() {
 	Route::get('/' , ['as' =>'home', 'uses' => 'HomeController@index']);
 	Route::get('/dashboard' , ['as' =>'dashboard', 'uses' => 'HomeController@dashboard']);
@@ -18,6 +17,20 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('rooms', 'RoomController');
     Route::resource('categories', 'CategoryController');
     Route::resource('appliances', 'ApplianceController');
+    Route::post('login', [
+        'as' => 'login',
+        'uses' => 'UserController@login'
+    ]);
+
+    Route::post('register', [
+        'as' => 'register',
+        'uses' => 'UserController@register'
+    ]);
+
+    Route::get('logout', [
+        'as' => 'logout',
+        'uses' =>'UserController@logout'
+    ]);
     
 });
 Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admin'], function() {

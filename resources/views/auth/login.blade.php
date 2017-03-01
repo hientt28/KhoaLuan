@@ -1,71 +1,51 @@
 @extends('layouts.auth')
 
-@section('htmlheader_title')
-    Log in
-@endsection
-
 @section('content')
-<body class="hold-transition login-page">
-    <div class="login-box">
-        <div class="login-logo">
-            <a href="{{ url('/home') }}"><b>Indigo</b></a>
-        </div><!-- /.login-logo -->
-
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> {{ trans('adminlte_lang::message.someproblems') }}<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <div class="login-box-body">
-    <p class="login-box-msg"> {{ trans('adminlte_lang::message.siginsession') }} </p>
-    <form action="{{ url('/login') }}" method="post">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="{{ trans('adminlte_lang::message.email') }}" name="email"/>
-            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-        </div>
-        <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="{{ trans('adminlte_lang::message.password') }}" name="password"/>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-        </div>
-        <div class="row">
-            <div class="col-xs-8">
-                <div class="checkbox icheck">
-                    <label>
-                        <input type="checkbox" name="remember"> {{ trans('adminlte_lang::message.remember') }}
-                    </label>
+<div class="container">
+    @include('errors.errors')
+    <div class="row">
+        <div class="agile-info_w3ls agile-info_w3ls_sub hvr-buzz-out" id="margin-login">
+            <h3>{{ trans('label.login') }}</h3>
+            <div class="agile-info_w3ls_grid second">
+                <form action="{{ url('/login') }}" method="POST">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input id="password" type="password" class="form-control" name="password" required placeholder="Password">
+                    </div>
+                    <div class="agile_remember">
+                        <div class="agile_remember_left">
+                            <div class="check">
+                                <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>{{ trans('label.remember') }}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">{{ trans('label.signin') }}</button>
+                </form>
+                <h4>{{ trans('label.continue_with') }}</h4>
+                <div class="bottom">
+                    <a class="btn btn-primary btn-sm" rel="publisher"
+                       href="">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a class="btn btn-primary btn-twitter btn-sm" href="#">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a class="btn btn-danger btn-sm" rel="publisher"
+                       href="#">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
                 </div>
-            </div><!-- /.col -->
-            <div class="col-xs-4">
-                <button type="submit" class="btn btn-primary btn-block btn-flat">{{ trans('adminlte_lang::message.buttonsign') }}</button>
-            </div><!-- /.col -->
+                <h5>{{ trans('message.signup_account') }} <a href="{{ url('/register') }}">{{ trans('label.signup') }}</a></h5>
+                <div class="agile_remember_right">
+                    <a href="">
+                        {{ trans('label.forgot_password') }}
+                    </a>
+                </div>
+            </div>
         </div>
-    </form>
-
-    <a href="{{ url('/password/reset') }}">{{ trans('adminlte_lang::message.forgotpassword') }}</a><br>
-    <a href="{{ url('/register') }}" class="text-center">{{ trans('adminlte_lang::message.registermember') }}</a>
-
-</div><!-- /.login-box-body -->
-
-</div><!-- /.login-box -->
-
-    @include('layouts.partials.scripts_auth')
-
-    <script>
-        $(function () {
-            $('input').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
-                increaseArea: '20%' // optional
-            });
-        });
-    </script>
-</body>
-
+    </div>
+</div>
 @endsection

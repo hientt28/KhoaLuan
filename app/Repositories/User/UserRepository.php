@@ -4,7 +4,6 @@ namespace App\Repositories\User;
 
 use App\Repositories\BaseRepository;
 use App\Models\User;
-use Auth;
 
 class UserRepository extends BaseRepository
 {
@@ -13,4 +12,5 @@ class UserRepository extends BaseRepository
     {
         $this->model = $user;
     }
+    
 }
