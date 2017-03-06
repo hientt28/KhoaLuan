@@ -34,7 +34,7 @@
                                         <tr>
                                             <td><input type="checkbox" class="checkthis" name="checkbox[]" value="{{ $row->id }}"/></td>
                                             <td> {{ $row->id }} </td>
-                                            <td> {{ $row->name }} </td>
+                                            <td><a href="{{ route('appliances.index')}}" > {{ $row->name }}</a> </td>
                                             <td>
                                                 <div class="field">
                                                     <a class="btn btn-primary" href="{{ route('rooms.edit', [ $row->id ]) }}" title="">
@@ -47,7 +47,7 @@
                                                         {{ trans('common.detail') }}
                                                         
                                                     </a>
-
+                                                    
                                                     {!! Form::open(['route' => ['rooms.destroy', $row->id], 'method' => 'DELETE']) !!}
                                                     {{ Form::button("<i class=\"fa fa-trash-o\"></i> ", [
                                                         'class' => 'btn btn-danger',

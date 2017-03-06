@@ -62,7 +62,7 @@
                 </a>
                 <ul class="treeview-menu">
                     
-                        <li><a href="{{ route('appliances.index') }}">AA</a></li>
+                    <li><a href="{{ route('rooms.index') }}">List Room</a></li>
                     
                     
                     <!-- <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li> -->
