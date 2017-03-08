@@ -40,15 +40,15 @@
                 </a>
             </li>
 
-            <li class="treeview active"> 
+            <li class="treeview"> 
                 <a href="#">
                     <i class='fa fa-pie-chart'></i> 
                     <span>{{ trans('label.chart') }}</span>
                     <span class="pull-right-container">
-                        <i class='fa fa-angle-left pull-right'></i>   
+                        <i class='fa fa-angle pull-right'></i>   
                     </span>
                 </a>
-                <ul class="treeview-menu menu-open" style="display:block;">
+                <ul class="treeview-menu">
                     <li><a>Chart 1</a></li>
                     <li><a>Chart 2</a></li>
 
@@ -61,8 +61,7 @@
                     <span>{{ trans('label.room') }}</span> 
                 </a>
                 <ul class="treeview-menu"> 
-                    <li><a href="{{ route('appliances.index') }}">Link 1</a></li>  
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+                    <li><a href="{{ route('rooms.index') }}">List Room</a></li>  
                 </ul>
             </li>
             <li><a href="#">

@@ -20,6 +20,7 @@ return [
         5 => 'Activated',
         6 => 'Deactivated',
     ],
+
     'user' => [
         'user_limit' => 30,
         'confirmed' => [

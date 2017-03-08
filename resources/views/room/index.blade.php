@@ -35,7 +35,7 @@
                                         <tr>
                                             <td class="text-center"><input type="checkbox" class="checkthis" name="checkbox[]" value="{{ $row->id }}"/></td>
                                             <td class="text-center"> {{ $row->id }} </td>
-                                            <td class="text-center"> {{ $row->name }} </td>
+                                            <td class="text-center"><a href="{{ route('admin.appliances.index')}}"> {{ $row->name }}</a> </td>
                                             <td class="text-center">
                                                 <a class="btn btn-primary" href="{{ route('rooms.edit', [ $row->id ]) }}" title="">
                                                     <span class="glyphicon glyphicon-edit"></span>
@@ -77,7 +77,7 @@
                         <a href="{{ route('rooms.create') }}" class="btn btn-success">
                             <i class="glyphicon glyphicon-plus-sign"></i>   
                          {{ trans('common.add_room') }} </a>
-                         <a href="{{ route('dashboard') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> {{ trans("common.back") }}</a>
+                        <a href="{{ route('dashboard') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> {{ trans("common.back") }}</a>
                     </div>
                 </div>
             </div>

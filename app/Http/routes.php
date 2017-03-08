@@ -16,7 +16,7 @@ Route::group(['middleware' => 'web'], function() {
     Route::resource('user', 'UserController');
     Route::resource('rooms', 'RoomController');
     Route::resource('categories', 'CategoryController');
-    Route::resource('appliances', 'ApplianceController');
+    
     Route::post('login', [
         'as' => 'login',
         'uses' => 'UserController@login'
@@ -40,7 +40,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admi
     ]);
     
     Route::resource('users', 'UserController', ['except' => 'destroy']); 
-   
+    Route::resource('appliances', 'ApplianceController');
 });
 
 

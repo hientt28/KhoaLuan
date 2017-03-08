@@ -1,0 +1,21 @@
+<?php
+return [
+    'name' => 'Appliance Name',
+    'status' => 'Status',
+    'action' => 'Action',
+    'electric_value' => 'Current Electric Value',
+    'list_app' => 'List Appliances',
+    'create' => 'Create',
+    'delete_multi' => 'Delete Multi',
+    'search' => 'Search',
+    'add_app' => 'Add Appliance',
+    'app_title_form' => 'Appliance Title Form',
+    'edit_app' => 'Edit Appliance',
+    'update' => 'Update',
+    'on' => 'On',
+    'off' => 'Off',
+    'standby' => 'Standby',
+    'unplugged' => 'Unplugged',
+    'activated' => 'Activated',
+    'deactivated' => 'Deactivated',
+];

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
@@ -51,9 +51,12 @@ class ApplianceController extends Controller
         $app['name'] = $request->name;
         $app['status'] = $request->status;
         $app['electric_value'] = $request->electric_value;
-        $this->appRepository->store($app);
-
-        return redirect()->route('appliances.index');
+        try {
+            $data = $this->appRepository->store($app);
+            return redirect()->route('admin.appliances.index');
+        } catch (Exception $e) {
+            return redirect()->route('admin.appliances.index')->withError($e->getMessage());
+        }
     }
 
     /**
@@ -93,7 +96,7 @@ class ApplianceController extends Controller
         $requestOnly = $request->only('name', 'status', 'electric_value');
         $this->appRepository->updateById($requestOnly, $id);
 
-        return redirect()->route('appliances.index');
+        return redirect()->route('admin.appliances.index');
     }
 
     /**
@@ -107,37 +110,9 @@ class ApplianceController extends Controller
          try {
             $data = $this->appRepository->deleteById($id);
         } catch (Exception $e) {
-            return redirect()->route('appliances.index')->withError($e->getMessage());
+            return redirect()->route('admin.appliances.index')->withError($e->getMessage());
         }
 
-        return redirect()->route('appliances.index');
+        return redirect()->route('admin.appliances.index');
     }
-
-    // public function importExcel(Request $request)
-    // {
-    //     if ($request->hasFile('fileCategory')) {
-    //         $path = $request->file('fileCategory')->getRealPath();
-    //         $categoryExcel = Excel::load($path)->get();
-    //         if (!empty($categoryExcel) && $categoryExcel->count()) {
-    //             foreach ($categoryExcel as $key => $value) {
-    //                 $insert[] = ['name' => $value->name, 'parent_id' => $value->parent_id];
-    //             }
-    //             if (!empty($insert)) {
-    //                 $this->categoryRepository->insert($insert);
-    //             }
-    //         }
-    //     }
-    //     return redirect()->route('admin.categories.index');
-    // }
-
-    // public function downloadExcel($type)
-    // {
-    //     $data  = Category::get()->toArray();
-
-    //     return Excel::create('fileDownloadCategory', function ($excel) use ($data) {
-    //         $excel->sheet('mySheet', function ($sheet) use ($data) {
-    //             $sheet->fromArray($data);
-    //         });
-    //     })->download($type);
-    // }
 }
