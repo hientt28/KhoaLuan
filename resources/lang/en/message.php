@@ -11,6 +11,11 @@ return [
     'active_register' => 'Thanks for signing up with Framgia Cooking! You must follow this link to activate your account:',
     'register_active' => 'Active my account in my mail !',
     'whoops' => 'Whoops !',
-    'input_errors' => 'Some note !',
+    'input_errors' => 'There were some problems with your input. !',
     'login_error' => 'username password doest not match',
+    'success' => 'Success',
+    'change_password_success' => 'Change Password Success',
+    'change_password_fail' => 'Change Password Fail',
+    'not_permission' => 'Your Account is not permission',
+    'update_successfully' => 'Update option successfully',
 ];

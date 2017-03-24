@@ -42,7 +42,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{ route('user.edit', ['id' => Auth::user()->id ]) }}" class="btn btn-default btn-flat">
+                                    <a href="{{ route('users.show', ['id' => Auth::user()->id ]) }}" class="btn btn-default btn-flat">
                                         <i class="fa fa-btn fa-user fa-fw"></i>
                                         {{ trans('label.profile') }}
                                     </a>

@@ -5,6 +5,13 @@ return [
     'dashboard' => 'Dashboard',
     'chart' => 'Chart',
     'room' => 'Room',
+    'save' => 'Save',
+    'reset' => 'Reset',
+    'change_pass' => 'Change Pass',
+    'password' => 'Password',
+    'new_password' => 'New Password',
+    'password_confirm' => 'Password Confirm',
+    'change_password' => 'Change Pass',
     'schedule' => 'Schedule',
     'report' => 'Report',
     'login' => 'Login Indigo',
@@ -33,5 +40,4 @@ return [
     'continue_with' => 'Continue With',
     'signup' => 'Sign Up',
     'remember' => 'Remember me',
-
 ];

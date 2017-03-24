@@ -13,7 +13,7 @@
 Route::group(['middleware' => 'web'], function() {
 	Route::get('/' , ['as' =>'home', 'uses' => 'HomeController@index']);
 	Route::get('/dashboard' , ['as' =>'dashboard', 'uses' => 'HomeController@dashboard']);
-    Route::resource('user', 'UserController');
+    Route::resource('users', 'UserController');
     Route::resource('rooms', 'RoomController');
     Route::resource('categories', 'CategoryController');
     
