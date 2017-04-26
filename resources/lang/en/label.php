@@ -40,4 +40,6 @@ return [
     'continue_with' => 'Continue With',
     'signup' => 'Sign Up',
     'remember' => 'Remember me',
+    'appliance' => 'Appliance',
+    'schedule' => 'Schedule',
 ];

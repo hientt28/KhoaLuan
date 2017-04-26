@@ -31,7 +31,7 @@ class UserController extends Controller
     {
         $users = $this->userRepository->paginate(trans('common.limit'));
 
-        return view('admin.user.index', compact('users'));
+        return view('user.index', compact('users'));
     }
      /**
      * Display the specified resource.

@@ -19,10 +19,10 @@ class CategoryRepository extends BaseRepository
     // 	return $this->model->where('parent_id', '<>', $id)->paginate($limit);
     // }
 
-    // public function listCategories()
-    // {
-    //     $listCategories = Category::pluck('name', 'id')->all();
+    public function listCategories()
+    {
+        $listCategories = Category::pluck('name', 'id')->all();
 
-    //     return $listCategories;
-    // }
+        return $listCategories;
+    }
 }

@@ -34,11 +34,32 @@ if (!function_exists('fill_status')) {
             case 4: {
                 return '<label class="label label-default">' . trans("appliances.unplugged") . '</label>';
             }
-            case 5: {
+        }
+    }
+}
+
+if (!function_exists('fill_state')) {
+    function fill_state($state)
+    {
+        switch ($state) {
+            case 1: {
                 return '<label class="btn btn-info label">' . trans("appliances.activated") . '</label>';
             }
-            case 6: {
+            case 2: {
                 return '<label class="btn btn-danger label">' . trans("appliances.deactivated") . '</label>';
+            }
+        }
+    }
+}
+if (!function_exists('fill_todo')) {
+    function fill_todo($todo)
+    {
+        switch ($todo) {
+            case 1: {
+                return '<label class="btn btn-success label">' . trans("appliances.turnon") . '</label>';
+            }
+            case 2: {
+                return '<label class="btn btn-danger label">' . trans("appliances.turnoff") . '</label>';
             }
         }
     }

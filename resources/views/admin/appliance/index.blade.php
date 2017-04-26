@@ -10,8 +10,8 @@
 
                 <div class="panel-body">
                     <div id="data_grid" class="dataTable_wrapper data_list">
-                        @include('appliance.grid', ['apps' => $apps])
-                        
+                        @include('admin.appliance.grid', ['apps' => $apps])
+                     
                     </div>
                 </div>
             </div>

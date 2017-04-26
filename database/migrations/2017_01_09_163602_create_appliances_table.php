@@ -14,7 +14,8 @@ class CreateAppliancesTable extends Migration
     {
         Schema::create('appliances', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('room_id');
+            $table->integer('schedule_id');
             $table->integer('category_id');
             $table->string('name');
             $table->integer('status')->nullable()->default(0);

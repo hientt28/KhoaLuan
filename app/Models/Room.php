@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Schedule;
-use App\Models\User;
 
 class Room extends Model
 {
@@ -13,9 +11,10 @@ class Room extends Model
     	'name',
     ];
 
-    public function schedules()
+
+    public function appliances()
     {
-    	return $this->hasMany(Schedule::class);
+        return $this->hasMany(Appliance::class);
     }
 
     public function user()

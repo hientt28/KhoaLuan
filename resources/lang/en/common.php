@@ -20,4 +20,5 @@ return [
     'dashboard_table' => 'Dashboard',
     'name' => 'Room Name',
     'room_list' => 'Room List',
+    'add_app' => 'Add Appliance',
 ];

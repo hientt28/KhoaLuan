@@ -1,20 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Exception;
 use App\Http\Requests;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\RoomRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\CreateAppRequest;
 use App\Repositories\RoomRepository;
+use App\Repositories\ApplianceRepository;
+use App\Models\Room;
+use App\Models\Appliance;
 
 class RoomController extends Controller
 {
     private $roomRepository;
+    private $appRepository;
 
-    public function __construct(RoomRepository $roomRepository)
+    public function __construct(RoomRepository $roomRepository, ApplianceRepository $appRepository)
     {
         $this->roomRepository = $roomRepository;
+        $this->appRepository = $appRepository;
     }
     /**
      * Display a listing of the resource.
@@ -49,10 +56,10 @@ class RoomController extends Controller
         try {
             $data = $this->roomRepository->create($newRoom);
         } catch (Exception $e) {
-            return redirect()->route('rooms.index')->withError($e->getMessage());
+            return redirect()->route('admin.rooms.index')->withError($e->getMessage());
         }
 
-        return redirect()->route('rooms.index')->withSuccess(trans('message.create_user_successfully'));
+        return redirect()->route('admin.rooms.index')->withSuccess(trans('message.create_user_successfully'));
     }
 
     /**
@@ -66,7 +73,7 @@ class RoomController extends Controller
         try {
             $rooms = $this->roomRepository->showById($id);
         } catch (Exception $ex) {
-            return redirect()->route('rooms.index')->withError($ex->getMessage());
+            return redirect()->route('admin.rooms.index')->withError($ex->getMessage());
         }
 
         return view('room.show', compact('rooms'));
@@ -83,7 +90,7 @@ class RoomController extends Controller
         try {
             $room = $this->roomRepository->showById($id);
         } catch (Exception $e) {
-            return redirect()->route('rooms.index')->withError($e->getMessage());
+            return redirect()->route('admin.rooms.index')->withError($e->getMessage());
         }
 
         return view('room.edit', compact('room'));
@@ -101,7 +108,7 @@ class RoomController extends Controller
         $requestOnly = $request->only('name');
         $this->roomRepository->updateById($requestOnly, $id);
 
-        return redirect()->route('rooms.index');
+        return redirect()->route('admin.rooms.index');
     }
 
     /**
@@ -115,9 +122,31 @@ class RoomController extends Controller
         try {
             $data = $this->roomRepository->deleteById($id);
         } catch (Exception $e) {
-            return redirect()->route('rooms.index')->withError($e->getMessage());
+            return redirect()->route('admin.rooms.index')->withError($e->getMessage());
         }
 
-        return redirect()->route('rooms.index');
+        return redirect()->route('admin.rooms.index');
     }
+
+    //Add Appliances belongsTo Room
+    public function getcreateApp($id) {
+        $room = Room::find($id);
+        
+        return view('admin.appliance.create', compact('room', 'roles'));
+    }
+
+    public function createApp(CreateAppRequest $request, $id){
+        $room = Room::find($id);
+        $app = new Appliance();
+        $app->name = $request->name;
+        $app->status = $request->status;
+        $app->electric_value = $request->electric_value;
+        $app->room_id = $room->id;
+        $app->save();
+
+        return redirect()->action('Admin\RoomController@index')->with('success', trans('session.appliance_create_success'));
+    }
+
+
+
 }

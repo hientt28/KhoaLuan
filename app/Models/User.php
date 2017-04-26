@@ -3,10 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\SocialNetwork;
-use App\Models\Room;
-use App\Models\Activity;
-use App\Models\Appliance;
+
 
 class User extends Authenticatable
 {
@@ -50,11 +47,6 @@ class User extends Authenticatable
     public function rooms()
     {
         return $this->hasMany(Room::class);
-    }
-
-    public function appliances()
-    {
-        return $this->hasMany(Appliance::class);
     }
 
     public function isAdmin()

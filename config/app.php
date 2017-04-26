@@ -161,6 +161,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         JD\Cloudder\CloudderServiceProvider::class,
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
+        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
 
     ],
 

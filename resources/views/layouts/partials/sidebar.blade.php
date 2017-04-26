@@ -49,9 +49,10 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a>Chart 1</a></li>
-                    <li><a>Chart 2</a></li>
-
+                    <li><a href="{{ route('columncharts') }}">ColumnChart</a></li>
+                    <li><a href="{{ route('donutcharts') }}">DonutChart</a></li>
+                    <li><a href="{{ route('piecharts') }}">PieChart</a></li>
+                    <li><a href="">LineChart</a></li>
                 </ul>
             </li>
 
@@ -60,11 +61,18 @@
                     <i class='fa fa-th'></i> 
                     <span>{{ trans('label.room') }}</span> 
                 </a>
-                <ul class="treeview-menu"> 
-                    <li><a href="{{ route('rooms.index') }}">List Room</a></li>  
+                <ul class="treeview-menu">
+                     <li><a href="{{ route('admin.rooms.index') }}">List Room</a></li>       
                 </ul>
             </li>
-            <li><a href="#">
+            <li> 
+                <a href="{{ route('appliances.index') }}">
+                    <i class='fa fa-dashboard'></i> 
+                    <span>{{ trans('label.appliance') }}</span>
+                    
+                </a>
+            </li>
+            <li><a href="{{ route('schedules.index') }}">
                 <i class="glyphicon glyphicon-time"></i> 
                 <span>{{ trans('label.schedule') }}</span>
                 </a>

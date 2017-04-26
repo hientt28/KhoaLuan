@@ -1,5 +1,6 @@
 <?php
 return [
+    'id' => 'Id',
     'name' => 'Appliance Name',
     'status' => 'Status',
     'action' => 'Action',
@@ -18,4 +19,6 @@ return [
     'unplugged' => 'Unplugged',
     'activated' => 'Activated',
     'deactivated' => 'Deactivated',
+    'turnon' => 'Turn On',
+    'turnoff' => 'Turn Off',
 ];

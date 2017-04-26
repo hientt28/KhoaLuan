@@ -17,7 +17,7 @@
                 </div>
                 <div class="panel-body">
                     
-                    {!! Form::open(['route' => ['rooms.store'], 'method' => 'post', 'class' => 'form-horizontal']) !!}
+                    {!! Form::open(['route' => ['admin.rooms.store'], 'method' => 'post', 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             {!! Form::label('name', trans('label.name'), ['class' => 'col-md-3 control-label required']) !!}
                             <div class="col-md-7">
@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-7">
                                 {{ Form::button('<i class="fa fa-btn fa-user"></i> ' . trans('common.save'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
-                                <a href="{{ route('rooms.index') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> {{ trans("common.back") }}</a>
+                                <a href="{{ route('admin.rooms.index') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> {{ trans("common.back") }}</a>
                             </div>
                         </div>
                     {!! Form::close() !!}

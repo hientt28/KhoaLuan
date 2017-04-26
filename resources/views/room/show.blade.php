@@ -6,7 +6,7 @@
 			<div class="row page-title-row">
 				<div class="col-md-7 col-md-offset-2">
 					<h3> {{ trans('common.room_detail') }} </h3>
-					<a href="{{ route('rooms.index') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i>{{ trans('common.back') }}</a>
+					<a href="{{ route('admin.rooms.index') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i>{{ trans('common.back') }}</a>
 				</div>
 			</div>
 			<br/>

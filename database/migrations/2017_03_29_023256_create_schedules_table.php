@@ -12,13 +12,11 @@ class CreateSchedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('schedules', function (Blueprint $table) {
+         Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('room_id');
-            $table->integer('appliance_id');
-            $table->string('name');
-            $table->integer('status')->nullable()->default(0);
-            $table->float('value');
+            $table->integer('todo')->nullable()->default(0);
+            $table->integer('state')->nullable()->default(0);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

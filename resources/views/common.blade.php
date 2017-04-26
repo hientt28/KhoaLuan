@@ -10,7 +10,7 @@
             
             <table class="table" id="myTable">
             	<ol class="breadcrumb">
-	            	<li><a href="{{ route('rooms.index') }}"> {{ trans('label.manage_room') }} </a></li>
+	            	<li><a href="{{ route('admin.rooms.index') }}"> {{ trans('label.manage_room') }} </a></li>
 	            </ol>
 
 	            <ol class="breadcrumb">

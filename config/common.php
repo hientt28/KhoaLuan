@@ -17,8 +17,14 @@ return [
         2 => 'Off',
         3 => 'Standby',
         4 => 'Unplugged',
-        5 => 'Activated',
-        6 => 'Deactivated',
+    ],
+    'state' => [
+        0 => 'Activated',
+        1 => 'Deactivated',
+    ],
+    'to_do' => [
+        0 => 'Turn On',
+        1 => 'Turn Off',
     ],
 
     'user' => [
