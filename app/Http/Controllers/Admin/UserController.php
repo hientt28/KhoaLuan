@@ -72,6 +72,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        
         $user = $this->userRepository->showById($id);
         return view('admin.user.edit', compact('user'));
     }
@@ -86,11 +87,13 @@ class UserController extends Controller
     {
         $user = $request->only(['name', 'email', 'role']);
         try {
-            $user = $this->userRepository->update($user, $id);
-            return redirect()->route('admin.users.index');
+        $user =$this->userRepository->updateById($user, $id);
+
+        return redirect()->route('admin.users.index');
         } catch (Exception $e) {
             return redirect()->route('admin.users.index')->withError($e->getMessage());
         }
+       
     }
     /**
      * Remove the specified resource from storage.
@@ -98,14 +101,23 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($ids)
     {
-        $ids = $request->checkbox;
+  
         try {
             $data = $this->userRepository->deleteById($ids);
+            
             return redirect()->route('admin.users.index');
         } catch (Exception $e) {
             return redirect()->route('admin.users.index')->withError($e->getMessage());
         }
+    }
+
+    public function search(Request $request)
+    {
+        $term = $request->input('term');
+        $user = $this->userRepository->search($term);
+
+        return view('admin.user.index', ['user' => $user, 'search' => true]);
     }
 }

@@ -20,8 +20,6 @@ class User extends Authenticatable
         'address',
         'phone',
         'role',
-        'confirmed',
-        'confirmation_code',
     ];
 
     /**

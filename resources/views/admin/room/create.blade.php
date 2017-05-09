@@ -17,7 +17,7 @@
                 </div>
                 <div class="panel-body">
                     
-                    {!! Form::open(['route' => ['rooms.store'], 'method' => 'post', 'class' => 'form-horizontal']) !!}
+                    {!! Form::open(['route' => ['admin.rooms.store'], 'method' => 'post', 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             {!! Form::label('name', trans('label.name'), ['class' => 'col-md-3 control-label required']) !!}
                             <div class="col-md-7">

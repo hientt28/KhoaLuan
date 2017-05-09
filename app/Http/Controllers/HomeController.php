@@ -40,4 +40,13 @@ class HomeController extends Controller
     {
         return view('common');
     }
+
+    public function electric_price()
+    {
+        return view('electric_price');
+    }
+    public function changepass()
+    {
+        return view('user.change_pass');
+    }
 }

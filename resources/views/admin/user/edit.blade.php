@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-lg-10 col-md-offset-1">
-                <div class="panel panel-primary">
+                <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             {{ trans('settings.edit_user') }}

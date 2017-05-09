@@ -22,4 +22,6 @@ interface BaseRepositoryInterface
 
     public function update($inputs, $id);
 
+    public function lists();
+
 }

@@ -14,9 +14,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<div class="wrapper">
 
 	    @include('layouts.partials.mainheader')
-	    @if (Auth::check() && Auth::user()->isAdmin())
-	        @include('layouts.partials.sidebar')
-	    @endif
+	    
+	    @include('layouts.partials.sidebar')
+
 	   
 	    @if (!Auth::guest())
 	        <div class="content-wrapper">

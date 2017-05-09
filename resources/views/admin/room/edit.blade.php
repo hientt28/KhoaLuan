@@ -16,7 +16,7 @@
                 </div>
                 <div class="panel-body">
                     
-                    {!! Form::model($room, ['route' => ['rooms.update', $room['id']], 'class' => 'form-horizontal', 'enctype' =>"multipart/form-data", 'method' => 'PUT']) !!}
+                    {!! Form::model($room, ['route' => ['admin.rooms.update', $room['id']], 'class' => 'form-horizontal', 'enctype' =>"multipart/form-data", 'method' => 'PUT']) !!}
                         <div class="form-group">
                             {!! Form::label('name', trans('label.name'), ['class' => 'control-label col-sm-2 required']) !!}
                             <div class="col-md-7">
@@ -34,7 +34,7 @@
                                 'type' => 'submit',
                                 'class' => 'btn btn-primary',
                                 ]) !!} -->
-                                <a href="{{ route('rooms.index') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i>{{ trans('common.back') }}</a>
+                                <a href="{{ route('admin.rooms.index') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i>{{ trans('common.back') }}</a>
                             </div>
                         </div>
                     {!! Form::close() !!}

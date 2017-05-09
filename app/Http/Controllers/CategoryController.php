@@ -64,7 +64,13 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $categories = $this->categoryRepository->showById($id);
+        } catch (Exception $ex) {
+            return redirect()->route('categories.index')->withError($ex->getMessage());
+        }
+
+        return view('category.detail', compact('categories'));
     }
 
     /**

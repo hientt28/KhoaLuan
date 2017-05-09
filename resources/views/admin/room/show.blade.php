@@ -25,7 +25,7 @@
                     
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-2">
-                            <a href="{{ route('rooms.index') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i>{{ trans('common.back') }}</a>
+                            <a href="{{ route('admin.rooms.index') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i>{{ trans('common.back') }}</a>
                         </div>
                     </div>
                    

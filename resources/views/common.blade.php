@@ -10,21 +10,27 @@
             
             <table class="table" id="myTable">
             	<ol class="breadcrumb">
-	            	<li><a href="{{ route('admin.rooms.index') }}"> {{ trans('label.manage_room') }} </a></li>
+	            	<li>
+	            		@if (Auth::check() && Auth::user()->isAdmin())
+	            		<a href="{{ route('admin.rooms.index') }}"> {{ trans('label.manage_room') }} </a>
+	            		@else
+	            			<a href="{{ route('rooms.index') }}"> {{ trans('label.manage_room') }} </a>
+	            		@endif
+	            	</li>
 	            </ol>
 
 	            <ol class="breadcrumb">
 	            	<li><a href="{{ route('categories.index') }}"> {{ trans('label.manage_categories') }} </a></li>
 	            </ol>
-
+	            @if (Auth::check() && Auth::user()->isAdmin())
 	            <ol class="breadcrumb">
 	            	<li><a href="{{ route('admin.users.index') }}"> {{ trans('label.manage_user') }} </a></li>
 	            </ol>
-
+	            @endif 
 	            <ol class="breadcrumb">
-	            	<li><a href="#"> {{ trans('label.assign_kwh_price') }} </a></li>
+	            	<li><a href="{{ route('electric_price')}}"> {{ trans('label.assign_kwh_price') }} </a></li>
 	            </ol>
-				  
+				
             </table>
         </div>
 

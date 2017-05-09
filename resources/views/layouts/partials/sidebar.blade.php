@@ -19,7 +19,7 @@
         @endif
 
         <!-- search form (Optional) -->
-        <form action="#" method="get" class="sidebar-form">
+        <form action="{{ url('/search') }}" method="get" class="sidebar-form">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="{{ trans('adminlte_lang::message.search') }}..."/>
               <span class="input-group-btn">
@@ -31,7 +31,6 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
-            
             <li> 
                 <a href="{{ url('dashboard') }}">
                     <i class='fa fa-dashboard'></i> 
@@ -41,7 +40,7 @@
             </li>
 
             <li class="treeview"> 
-                <a href="#">
+                <a href="{{ route('columncharts') }}">
                     <i class='fa fa-pie-chart'></i> 
                     <span>{{ trans('label.chart') }}</span>
                     <span class="pull-right-container">
@@ -50,9 +49,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('columncharts') }}">ColumnChart</a></li>
-                    <li><a href="{{ route('donutcharts') }}">DonutChart</a></li>
                     <li><a href="{{ route('piecharts') }}">PieChart</a></li>
-                    <li><a href="">LineChart</a></li>
                 </ul>
             </li>
 
@@ -62,7 +59,13 @@
                     <span>{{ trans('label.room') }}</span> 
                 </a>
                 <ul class="treeview-menu">
-                     <li><a href="{{ route('admin.rooms.index') }}">List Room</a></li>       
+                    <li>
+                        @if (Auth::check() && Auth::user()->isAdmin())
+                        <a href="{{ route('admin.rooms.index') }}">List Room</a>
+                        @else
+                            <a href="{{ route('rooms.index') }}">List Room</a>
+                        @endif
+                    </li>       
                 </ul>
             </li>
             <li> 
@@ -70,17 +73,6 @@
                     <i class='fa fa-dashboard'></i> 
                     <span>{{ trans('label.appliance') }}</span>
                     
-                </a>
-            </li>
-            <li><a href="{{ route('schedules.index') }}">
-                <i class="glyphicon glyphicon-time"></i> 
-                <span>{{ trans('label.schedule') }}</span>
-                </a>
-            </li>
-
-            <li><a href="#">
-                <i class="glyphicon glyphicon-list-alt"></i> 
-                <span>{{ trans('label.report') }}</span>
                 </a>
             </li>
             

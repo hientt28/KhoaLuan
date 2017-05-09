@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use Exception;
 use App\Http\Requests;
@@ -32,30 +32,8 @@ class RoomController extends Controller
     public function index()
     {
         $rows = $this->roomRepository->paginate(trans('common.limit'));
-        return view('admin.room.index', compact('rows'));
+        return view('room.index', compact('rows'));
     }
-
-     public function getRoom()
-    {
-      
-        $rooms = $this->roomRepository->all();
-        $appliances = $this->appRepository->all();
-       
-
-        return view('admin.room.index', compact('rooms', 'appliances'));
-    }
-    
-    // public function dashboard() 
-    // {
-    //     $rooms= $this->roomRepository->all();
-    //     $appliances = $this->appRepository->all();
-       
-    //     foreach ($rooms as $item) {
-    //         $item->countApp = DB::table('appliances')->count();
-    //     }
-
-    //     return view('charts', compact('rooms', 'appliances'));
-    // }
 
     /**
      * Show the form for creating a new resourc
@@ -64,7 +42,7 @@ class RoomController extends Controller
      */
     public function create()
     {
-        return view('admin.room.create');
+        return view('room.create');
     }
 
     /**
@@ -79,10 +57,10 @@ class RoomController extends Controller
         try {
             $data = $this->roomRepository->create($newRoom);
         } catch (Exception $e) {
-            return redirect()->route('admin.rooms.index')->withError($e->getMessage());
+            return redirect()->route('rooms.index')->withError($e->getMessage());
         }
 
-        return redirect()->route('admin.rooms.index')->withSuccess(trans('message.create_user_successfully'));
+        return redirect()->route('rooms.index')->withSuccess(trans('message.create_user_successfully'));
     }
 
     /**
@@ -96,10 +74,10 @@ class RoomController extends Controller
         try {
             $rooms = $this->roomRepository->showById($id);
         } catch (Exception $ex) {
-            return redirect()->route('admin.rooms.index')->withError($ex->getMessage());
+            return redirect()->route('rooms.index')->withError($ex->getMessage());
         }
 
-        return view('admin.room.show', compact('rooms'));
+        return view('room.show', compact('rooms'));
     }
 
     /**
@@ -113,10 +91,10 @@ class RoomController extends Controller
         try {
             $room = $this->roomRepository->showById($id);
         } catch (Exception $e) {
-            return redirect()->route('admin.rooms.index')->withError($e->getMessage());
+            return redirect()->route('rooms.index')->withError($e->getMessage());
         }
 
-        return view('admin.room.edit', compact('room'));
+        return view('room.edit', compact('room'));
     }
 
     /**
@@ -131,7 +109,7 @@ class RoomController extends Controller
         $requestOnly = $request->only('name');
         $this->roomRepository->updateById($requestOnly, $id);
 
-        return redirect()->route('admin.rooms.index');
+        return redirect()->route('rooms.index');
     }
 
     /**
@@ -145,17 +123,17 @@ class RoomController extends Controller
         try {
             $data = $this->roomRepository->deleteById($id);
         } catch (Exception $e) {
-            return redirect()->route('admin.rooms.index')->withError($e->getMessage());
+            return redirect()->route('rooms.index')->withError($e->getMessage());
         }
 
-        return redirect()->route('admin.rooms.index');
+        return redirect()->route('rooms.index');
     }
 
     //Add Appliances belongsTo Room
     public function getcreateApp($id) {
         $room = Room::find($id);
         $catsList = Category::lists('name','id');
-        return view('admin.appliance.create', compact('room', 'catsList'));
+        return view('user.appliance.create', compact('room', 'catsList'));
     }
 
     public function createApp(CreateAppRequest $request, $id){
@@ -169,7 +147,7 @@ class RoomController extends Controller
         $app->category_id = $category->id;
         $app->save();
 
-        return redirect()->action('Admin\RoomController@index')->with('success', trans('session.appliance_create_success'));
+        return redirect()->action('RoomController@index')->with('success', trans('session.appliance_create_success'));
     }
 
 

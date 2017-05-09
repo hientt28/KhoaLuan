@@ -5,7 +5,7 @@ return [
     'table' => 'Category Table',
     'filter' => 'Filter', 
     'id' => 'ID',
-    'parent' => 'Parent',
+    'choose_category' => 'Choose Category',
     'name' => 'Name',
     'create' => 'Create Category',
     'add' => 'Add',
@@ -15,4 +15,5 @@ return [
     'update' => 'Update',
     'description' => 'Description',
     'action' => 'Action',
+    'cate_name' => 'Category Name',
 ];

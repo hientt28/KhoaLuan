@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\ApplianceRepository;
+use App\Models\Appliance;
+use App\Models\Room;
+use App\Models\Category;
 
 
 class ApplianceController extends Controller
@@ -40,8 +43,7 @@ class ApplianceController extends Controller
     {
         //return view ('appliance.create');
     }
-
-    /**
+     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -49,7 +51,16 @@ class ApplianceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $app['name'] = $request->name;
+        $app['status'] = $request->status;
+        $app['category_id'] = $request->category_id;
+        $app['electric_value'] = $request->electric_value;
+        try {
+            $data = $this->appRepository->store($app);
+            return redirect()->route('rooms.index');
+        } catch (Exception $e) {
+            return redirect()->route('rooms.index')->withError($e->getMessage());
+        }
     }
 
     /**
@@ -71,7 +82,9 @@ class ApplianceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $app = $this->appRepository->showById($id);
+        $catsList = Category::lists('name','id');
+        return view('user.appliance.edit', compact('app', 'catsList'));
 
     }
 
@@ -84,7 +97,11 @@ class ApplianceController extends Controller
      */
     public function update(Request $request, $id)
     {
-       //
+        $room = Room::find($id);
+        $requestOnly = $request->only('name', 'status', 'electric_value', 'category_id');
+        $this->appRepository->updateById($requestOnly, $id);
+
+        return redirect()->route('rooms.appliances.list',$room->id);
     }
 
     /**
@@ -95,7 +112,41 @@ class ApplianceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $data = $this->appRepository->deleteById($id);
+        } catch (Exception $e) {
+            return redirect()->route('appliances.index')->withError($e->getMessage());
+        }
+
+        return redirect()->route('appliances.index');
     }
+
+    public function listApp($id)
+    {
+        $room = Room::find($id);
+        $apps = Appliance::where('room_id', $room->id)->get();
+        return view('user.appliance.index', compact('room', 'apps'));
+
+    }
+    // public function getDelete($id)
+    // {
+    //     $app = Appliance::find($id);
+    //     if($app->user_id == 1) {
+            
+    //         $app->delete();
+    //         // Appliance::destroy($id);
+    //         return redirect()->action('ApplianceController@index')
+    //             ->with('success', trans('session.appliances_delete_success'));
+    //     }
+    //     else {
+    //         echo "<script type = 'text/javascript'>
+    //                 alert('Sorry! You Can Not Delete Because You are user!');
+    //                 window.location = '";
+    //                     echo route('room.index');
+    //                 echo "';
+    //               </script>";
+    //     }
+
+    // }
     
 }

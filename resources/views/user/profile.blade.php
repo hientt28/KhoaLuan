@@ -44,6 +44,9 @@
                             <a class="btn btn-info" href="{{ action('UserController@edit', [$user->id]) }}">
                                 {{ trans('label.update_profile') }}
                             </a>
+                            <a class="btn btn-info" href="{{ action('HomeController@changepass', [$user->id]) }}">
+                                Change Password
+                            </a>
                         </div>
                     </div>
                    

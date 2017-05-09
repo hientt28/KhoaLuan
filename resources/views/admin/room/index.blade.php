@@ -36,17 +36,17 @@
                                         <tr>
                                             <td class="text-center"><input type="checkbox" class="checkthis" name="checkbox[]" value="{{ $row->id }}"/></td>
                                             <td class="text-center"> {{ $row->id }} </td>
-                                            <td class="text-center"><a href="{{ route('rooms.appliances.list',[$row->id ]) }}"> {{ $row->name }}</a> </td>
+                                            <td class="text-center"><a href="{{ route('admin.rooms.appliances.list',[$row->id ]) }}"> {{ $row->name }}</a> </td>
                                             <td>
-                                                <a class="btn btn-primary" href="{{ route('rooms.appliances.create', $row->id) }}" role="button"><i class="fa fa-plus-circle"></i> {{ trans('common.add_app') }} </a>
+                                                <a class="btn btn-primary" href="{{ route('admin.rooms.appliances.create', $row->id) }}" role="button"><i class="fa fa-plus-circle"></i> {{ trans('common.add_app') }} </a>
                                             </td>
                                             <td class="text-center">
-                                                <a class="btn btn-primary" href="{{ route('rooms.edit', [ $row->id ]) }}" title="">
+                                                <a class="btn btn-primary" href="{{ route('admin.rooms.edit', [ $row->id ]) }}" title="">
                                                     <span class="glyphicon glyphicon-edit"></span>
                                                     {{ trans('common.edit') }}
                                                 </a>
 
-                                                <a class="btn btn-success" href="{{ route('rooms.show', [ $row->id ]) }}" title="detail">
+                                                <a class="btn btn-success" href="{{ route('admin.rooms.show', [ $row->id ]) }}" title="detail">
                                                     <span class="glyphicon glyphicon-arrow-right"></span>
                                                     {{ trans('common.detail') }}
                                                     
@@ -54,7 +54,7 @@
 
                                             </td>
                                             <td class="text-center">
-                                                 {!! Form::open(['route' => ['rooms.destroy', $row->id], 'method' => 'DELETE']) !!}
+                                                 {!! Form::open(['route' => ['admin.rooms.destroy', $row->id], 'method' => 'DELETE']) !!}
                                                     {{ Form::button("<i class=\"fa fa-trash-o\"></i> ", [
                                                         'class' => 'btn btn-danger',
                                                         'onclick' => "return confirm('" . trans('common.confirm_delete') . "')",
@@ -73,7 +73,7 @@
 
                     </div>
                     <div class="col-md-7 text-left">
-                        <a href="{{ route('rooms.create') }}" class="btn btn-success">
+                        <a href="{{ route('admin.rooms.create') }}" class="btn btn-success">
                             <i class="glyphicon glyphicon-plus-sign"></i>   
                          {{ trans('common.add_room') }} </a>
                         <a href="{{ route('dashboard') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> {{ trans("common.back") }}</a>

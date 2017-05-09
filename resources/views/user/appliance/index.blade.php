@@ -10,7 +10,7 @@
 
                 <div class="panel-body">
                     <div id="data_grid" class="dataTable_wrapper data_list">
-                        @include('admin.appliance.grid', ['apps' => $apps])
+                        @include('user.appliance.grid', ['apps' => $apps])
                      
                     </div>
                 </div>
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="col-md-10 text-left col-md-offset-1"> 
-            <a href="{{ route('admin.rooms.index') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i>{{ trans('common.back') }}</a>
+            <a href="{{ route('rooms.index') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i>{{ trans('common.back') }}</a>
         </div>
     </div>
 

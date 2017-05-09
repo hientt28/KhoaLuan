@@ -37,4 +37,5 @@ return [
             'length' => 10,
         ],
     ],
+    'paginate_document_per_page' => 5,
 ];

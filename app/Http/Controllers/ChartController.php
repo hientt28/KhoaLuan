@@ -6,74 +6,70 @@ use Illuminate\Http\Request;
 use Khill\Lavacharts\Lavacharts;
 use App\Models\Appliance;
 use App\Repositories\ApplianceRepository;
+use App\Repositories\Category\CategoryRepository;
 use App\Repositories\RoomRepository;
+use DB;
 
 class ChartController extends Controller
 {
     private $appRepository;
+    private $categoryRepository;
     private $roomRepository;
-    public function __construct(ApplianceRepository $appRepository, RoomRepository $roomRepository)
+    public function __construct(ApplianceRepository $appRepository, RoomRepository $roomRepository, CategoryRepository $categoryRepository)
     {
         $this->middleware('auth');
         $this->appRepository = $appRepository;
         $this->roomRepository = $roomRepository;
+        $this->categoryRepository = $categoryRepository;
     }
+
+    
     public function getColumnChart()
     {
-     	$lava = new Lavacharts;
-  //       $apps = $this->appRepository->all();
-  //      // dd($apps);
-  //       $data = $lava->DataTable();
-  //       $data->addStringColumn('Appliance Name')
-  //           ->addNumberColumn('Electric Value');
-
-  //       foreach ($apps as $app) {
-  //           $data->addRow([$app->name, $app->electric_value]);
-           
-  //       }
-		// $lava->ColumnChart('Appliance', $data, ['title' => 'ColumnChart Of Appliance Value']);
-
-  //       return view('charts', compact('lava'));
+        $lava = new Lavacharts;
+      
         $rooms = $this->roomRepository->all();
+        $appliances = $this->appRepository->all();
+       
+        foreach ($rooms as $item) {
+            $item->countApp = DB::table('rooms')
+                    ->join('appliances', 'appliances.room_id', '=', 'rooms.id')
+                    ->where('room_id', $item->id)
+                    ->count();
+        }
+
         $data = $lava->DataTable();
         $data->addStringColumn('Room')
             ->addNumberColumn('Appliance');
         foreach ($rooms as $room) {
             $data->addRow([$room->name, count($room->appliances)]);
         }
-        $lava->ColumnChart('Room', $data, ['title' => 'ColumnChart Of Appliance Count In Room']);
+        $lava->ColumnChart('Room', $data, ['title' => 'Biểu đồ thống kê số lượng thiết bị điện theo từng phòng']);
 
-        return view('charts', compact('lava'));
-    }
-
-    public function getDonutChart()
-    {
-    	$lava = new Lavacharts; // See note below for Laravel
-
-		$app = $lava->DataTable();
-		$data = Appliance::select("name as 0","electric_value as 1")->get()->toArray();
-
-		$app->addStringColumn('Appliance Name')
-		           ->addNumberColumn('Electric Value')
-		           ->addRows($data);
-		$lava->DonutChart('Appliance', $app, ['title' => 'DonutChart Of Appliance Value']);
-
-        return view('donutcharts',compact('lava'));
+        return view('charts', compact('lava', 'rooms', 'appliances'));
     }
 
     public function getPieChart()
     {
         $lava = new Lavacharts; // See note below for Laravel
-
+        $categories = $this->categoryRepository->all();
+        $appliances = $this->appRepository->all();
+       
+        foreach ($categories as $item) {
+            $item->countApp = DB::table('categories')
+                    ->join('appliances', 'appliances.category_id', '=', 'categories.id')
+                    ->where('category_id', $item->id)
+                    ->count();
+        }
         $app = $lava->DataTable();
-        $data = Appliance::select("name as 0","electric_value as 1")->get()->toArray();
-
-        $app->addStringColumn('Appliance Name')
-                   ->addNumberColumn('Electric Value')
-                   ->addRows($data);
-        $lava->PieChart('Appliance', $app, ['title' => 'DonutChart Of Appliance Value']);
-
-        return view('piecharts',compact('lava'));
+        
+        $app->addStringColumn('Category')
+                   ->addNumberColumn('Appliance');
+        foreach ($categories as $item) {
+            $app->addRow([$item->name, count($item->appliances)]);
+        }
+        $lava->PieChart('Category', $app, ['title' => 'Biểu đồ số lượng thiết bị điện theo loại']);
+        return view('piecharts',compact('lava', 'categories', 'appliances'));
     }
 
 }

@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-md-7 col-md-offset-2">
-            <div class="panel panel-primary">
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title"> {{ trans('appliances.app_title_form') }} </h3>
                 </div>
@@ -21,6 +21,12 @@
                             {!! Form::label('name', trans('appliances.name'), ['class' => 'col-md-3 control-label required']) !!}
                             <div class="col-md-7">
                                 {!! Form::text('name', old('name'), ['class' => 'form-control', 'required' => true]) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('category_id', trans('category.choose_category'), ['class' => 'col-md-3 control-label required']) !!}
+                            <div class="col-md-7">
+                                {!! Form::select('category_id', $catsList, null,  ['class' => 'form-control', 'required' => true]) !!}
                             </div>
                         </div>
                         <div class="form-group">

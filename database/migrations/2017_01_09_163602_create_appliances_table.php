@@ -19,7 +19,7 @@ class CreateAppliancesTable extends Migration
             $table->integer('category_id');
             $table->string('name');
             $table->integer('status')->nullable()->default(0);
-            $table->float('electric_value');
+            $table->string('electric_value');
             $table->timestamps();
         });
     }

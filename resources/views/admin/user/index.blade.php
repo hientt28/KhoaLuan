@@ -6,16 +6,14 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-primary filterable">
+                <div class="panel panel-info filterable">
                     <div class="panel-heading">
                         <h3 class="panel-title">{{ trans('settings.admin_manager') }}</h3>
                         <div class="text-right">
-                            <a href="{{ route('admin.users.create') }}" class="btn btn-danger"><i class="fa fa-plus-circle"></i>&nbsp     {{ trans('settings.create') }}
+                           
+                            <a href="{{ route('admin.users.create') }}" class="btn btn-warning"><i class="fa fa-plus-circle"></i>&nbsp     {{ trans('settings.create') }}
                             </a>
                             <a href="{{ route('dashboard') }}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> {{ trans("common.back") }}</a>
-                            <button class="btn btn-default btn-filter">
-                                <span class="fa fa-filter"></span>{{ trans('settings.filter') }}
-                            </button>
                         </div>
                     </div>
                     <table class="table" id="myTable">
@@ -60,7 +58,7 @@
                                         </a>
                                     </td>
                                     <td class="text-center">
-                                        {!! Form::open(['route' => ['admin', $user->id], 'method' => 'DELETE']) !!}
+                                        {!! Form::open(['route' => ['admin.users.destroy', $user->id], 'method' => 'DELETE']) !!}
                                                 {{ Form::button("<i class=\"fa fa-trash-o\"></i> ", [
                                                     'class' => 'btn btn-danger',
                                                     'onclick' => "return confirm('" . trans('settings.confirm_delete') . "')",
@@ -72,7 +70,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                     
                 </div>
             </div>
         </div>
